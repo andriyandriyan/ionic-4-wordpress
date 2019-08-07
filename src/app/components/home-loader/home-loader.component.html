@@ -1,0 +1,17 @@
+<ion-skeleton-text animated style="height: 275px"></ion-skeleton-text>
+<ion-card *ngFor="let post of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" mode="ios" no-margin>
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <ion-skeleton-text animated></ion-skeleton-text>
+    </ion-thumbnail>
+    <ion-label text-wrap>
+      <h2>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </h2>
+      <p>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </p>
+    </ion-label>
+  </ion-item>
+</ion-card>

@@ -1,0 +1,23 @@
+ion-card {
+  margin: 8px;
+
+  ion-item {
+    --padding-start: 8px;
+  }
+
+  ion-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+
+  h2 {
+    ion-skeleton-text {
+      height: 18px;
+
+      &:last-child {
+        width: 75%;
+      }
+    }
+  }
+
+}

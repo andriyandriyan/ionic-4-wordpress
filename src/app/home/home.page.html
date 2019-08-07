@@ -1,0 +1,59 @@
+<div class="transparent" [class.show-background]="showToolbar">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title *ngIf="showToolbar">
+        Beranda
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" src="assets/icons/search.svg"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+<ion-content color="light" fullscreen scrollEvents (ionScroll)="onScroll($event)">
+
+  <ng-container *ngIf="!loading; else elseTemplate">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" [pullMin]="100">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <swiper>
+      <div class="trending" *ngFor="let post of trending">
+        <ion-img [src]="post.img"></ion-img>
+        <div class="caption">
+          <h2 [innerHTML]="post.title"></h2>
+          <p class="date-author">
+            {{ post.date | date: 'dd MMM yyyy' }} &bull;
+            <ion-text color="light">{{ post.author }}</ion-text>
+          </p>
+        </div>
+      </div>
+    </swiper>
+
+    <ion-card *ngFor="let post of posts" mode="ios" no-margin>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-img [src]="post.img"></ion-img>
+        </ion-thumbnail>
+        <ion-label text-wrap>
+          <h2 [innerHTML]="post.title"></h2>
+          <p>{{ post.date | date: 'dd MMM yyyy HH:mm' }} &bull; {{ post.author }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+
+    <ion-infinite-scroll threshold="80px" (ionInfinite)="loadMoreData($event)">
+      <ion-infinite-scroll-content loading-spinner="dots">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <app-home-loader></app-home-loader>
+  </ng-template>
+
+</ion-content>
